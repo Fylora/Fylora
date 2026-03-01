@@ -80,6 +80,7 @@ export async function processPdf(
           canvas.height = viewport.height;
           canvas.width = viewport.width;
 
+          /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
           await page.render({ canvasContext: context, viewport, canvas: canvas as any }).promise;
 
           // Drastically crush the page into a lower fidelity JPEG payload
@@ -176,8 +177,8 @@ export async function processPdf(
         pages.forEach(p => newDoc.addPage(p));
 
         return toBlob(await newDoc.save());
-      } catch (err: any) {
-        if (err?.message?.includes("password")) {
+      } catch (err: unknown) {
+        if (err instanceof Error && err.message.includes("password")) {
           throw new Error("Incorrect Password.");
         }
         console.error("Unlock Error Breakdown:", err);
@@ -245,6 +246,7 @@ export async function processPdf(
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         await page.render({ canvasContext: context, viewport, canvas: canvas as any }).promise;
 
         const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, "image/png"));
@@ -270,6 +272,7 @@ export async function processPdf(
       canvas.height = viewport.height;
       canvas.width = viewport.width;
 
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       await page.render({ canvasContext: context, viewport, canvas: canvas as any }).promise;
       const dataUrl = canvas.toDataURL("image/png");
 
@@ -298,6 +301,7 @@ export async function processPdf(
         const content = await page.getTextContent();
         const pdfLibPage = pages[i - 1];
 
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         for (const item of content.items as any[]) {
           if (item.str && item.str.toLowerCase().includes(searchText)) {
             found = true;
