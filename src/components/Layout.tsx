@@ -108,6 +108,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     {link.label}
                   </Link>
                 ))}
+
+                <div className="pt-3 mt-1 mb-1 border-t border-border">
+                  <Button asChild className="w-full justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
+                    <Link to="/services" onClick={() => setMobileOpen(false)}>Our Services</Link>
+                  </Button>
+                </div>
               </nav>
             </motion.div>
           )}
