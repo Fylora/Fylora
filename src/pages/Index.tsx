@@ -175,25 +175,24 @@ const Index = () => {
             <p className="text-muted-foreground">Hear what our community says about Fylora.</p>
           </div>
 
-          <div className="relative max-w-5xl mx-auto px-4 sm:px-12">
+          <div className="relative max-w-6xl mx-auto px-12 sm:px-16">
             {/* Left Arrow */}
             <Button
               variant="outline"
               size="icon"
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-background shadow-md hidden sm:flex"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-background/80 backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.5)] hidden sm:flex hover:bg-white/10 transition-colors"
               onClick={() => setReviewIndex(prev => Math.max(0, prev - 1))}
               disabled={reviewIndex === 0}
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-6 w-6" />
             </Button>
 
             <div className="overflow-hidden py-4">
               <motion.div
-                className="flex gap-6"
+                className="flex gap-4 sm:gap-6"
                 initial={false}
-                animate={{ x: `calc(-${reviewIndex * 100}% - ${reviewIndex * 1.5}rem)` }}
+                animate={{ x: `calc(-${reviewIndex * 100}% - ${reviewIndex * (window.innerWidth < 640 ? 1 : 1.5)}rem)` }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                style={{ width: `${Math.max(1, reviews.length) * 100}%` }}
               >
                 {reviews.map((r, i) => (
                   <div key={i} className="w-full sm:w-[calc(33.333%-1rem)] flex-shrink-0">
@@ -225,11 +224,11 @@ const Index = () => {
             <Button
               variant="outline"
               size="icon"
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-background shadow-md hidden sm:flex"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-background/80 backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.5)] hidden sm:flex hover:bg-white/10 transition-colors"
               onClick={() => setReviewIndex(prev => Math.min(Math.max(0, reviews.length - 3), prev + 1))}
               disabled={reviewIndex >= reviews.length - 3 || reviews.length <= 3}
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-6 w-6" />
             </Button>
 
             {/* Mobile Swipe Indicators */}
