@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { to: "/", label: "Home" },
+  { to: "/services", label: "Services" },
   { to: "/tools", label: "All Tools" },
   { to: "/about", label: "About" },
   { to: "/privacy", label: "Privacy" },
@@ -151,6 +152,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div className="flex flex-col gap-4">
               <h4 className="font-display font-semibold text-foreground tracking-wide">Product</h4>
               <nav className="flex flex-col gap-3">
+                <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">Our Services</Link>
                 <Link to="/tools" className="text-muted-foreground hover:text-primary transition-colors">All Tools</Link>
                 <Link to="/tool/merge" className="text-muted-foreground hover:text-primary transition-colors">Merge PDF</Link>
                 <Link to="/tool/compress" className="text-muted-foreground hover:text-primary transition-colors">Compress PDF</Link>
