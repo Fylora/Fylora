@@ -21,6 +21,7 @@ const TermsPage = React.lazy(() => import("./pages/TermsPage"));
 const PressPage = React.lazy(() => import("./pages/PressPage"));
 const FaqPage = React.lazy(() => import("./pages/FaqPage"));
 const FeatureRequestPage = React.lazy(() => import("./pages/FeatureRequestPage"));
+const JourneyPage = React.lazy(() => import("./pages/JourneyPage"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ const App = () => (
             <Route path="/press" element={<PressPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/request-feature" element={<FeatureRequestPage />} />
+            <Route path="/journey" element={<JourneyPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
