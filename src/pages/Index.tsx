@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowRight, Shield, Zap, Lock, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Shield, Zap, Lock, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { tools } from "@/lib/tools";
 import Layout from "@/components/Layout";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const ToolCard = React.lazy(() => import("@/components/ToolCard"));
@@ -18,6 +18,7 @@ const features = [
 
 const Index = () => {
   const featuredTools = tools.slice(0, 8);
+  const [reviewIndex, setReviewIndex] = useState(0);
 
   const { data: reviews = [] } = useQuery({
     queryKey: ['homepage-reviews'],
@@ -173,29 +174,73 @@ const Index = () => {
             <h2 className="font-display text-3xl font-bold text-foreground mb-3">Loved by Users</h2>
             <p className="text-muted-foreground">Hear what our community says about Fylora.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {reviews.map((r, i) => (
+
+          <div className="relative max-w-5xl mx-auto px-4 sm:px-12">
+            {/* Left Arrow */}
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-background shadow-md hidden sm:flex"
+              onClick={() => setReviewIndex(prev => Math.max(0, prev - 1))}
+              disabled={reviewIndex === 0}
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+
+            <div className="overflow-hidden py-4">
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-3xl bg-card border border-white/5 shadow-sm text-left flex flex-col justify-between"
+                className="flex gap-6"
+                initial={false}
+                animate={{ x: `calc(-${reviewIndex * 100}% - ${reviewIndex * 1.5}rem)` }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                style={{ width: `${Math.max(1, reviews.length) * 100}%` }}
               >
-                <div>
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: 5 }).map((_, idx) => (
-                      <Star key={idx} className={`h-4 w-4 ${idx < r.rating ? 'fill-yellow-400 text-yellow-400' : 'fill-transparent text-muted-foreground/30'}`} />
-                    ))}
+                {reviews.map((r, i) => (
+                  <div key={i} className="w-full sm:w-[calc(33.333%-1rem)] flex-shrink-0">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="p-6 rounded-3xl bg-card border border-white/5 shadow-sm text-left flex flex-col justify-between h-full"
+                    >
+                      <div>
+                        <div className="flex gap-1 mb-4">
+                          {Array.from({ length: 5 }).map((_, idx) => (
+                            <Star key={idx} className={`h-4 w-4 ${idx < r.rating ? 'fill-yellow-400 text-yellow-400' : 'fill-transparent text-muted-foreground/30'}`} />
+                          ))}
+                        </div>
+                        <p className="text-foreground leading-relaxed italic">
+                          "{r.comment && r.comment.trim().length > 0 ? r.comment : "Great experience, highly recommended!"}"
+                        </p>
+                      </div>
+                      {r.tool && <p className="text-xs font-bold text-primary mt-6 tracking-widest uppercase opacity-80">{r.tool.replace(/-/g, " ")}</p>}
+                    </motion.div>
                   </div>
-                  <p className="text-foreground leading-relaxed italic">
-                    "{r.comment && r.comment.trim().length > 0 ? r.comment : "Great experience, highly recommended!"}"
-                  </p>
-                </div>
-                {r.tool && <p className="text-xs font-bold text-primary mt-6 tracking-widest uppercase opacity-80">{r.tool.replace(/-/g, " ")}</p>}
+                ))}
               </motion.div>
-            ))}
+            </div>
+
+            {/* Right Arrow */}
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-background shadow-md hidden sm:flex"
+              onClick={() => setReviewIndex(prev => Math.min(Math.max(0, reviews.length - 3), prev + 1))}
+              disabled={reviewIndex >= reviews.length - 3 || reviews.length <= 3}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </Button>
+
+            {/* Mobile Swipe Indicators */}
+            <div className="flex sm:hidden justify-center gap-2 mt-6">
+              {Array.from({ length: Math.max(1, reviews.length - 2) }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`h-2 rounded-full transition-all ${i === reviewIndex ? 'w-6 bg-primary' : 'w-2 bg-muted'}`}
+                />
+              ))}
+            </div>
           </div>
         </section>
       )}
