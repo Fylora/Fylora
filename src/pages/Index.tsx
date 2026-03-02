@@ -24,17 +24,25 @@ const Index = () => {
     queryFn: async () => {
       if (!db) return [];
       try {
+        // Fetch approved reviews only (avoids Firebase composite index requirements)
         const q = query(
           collection(db, "reviews"),
-          where("approved", "==", true),
-          where("rating", ">=", 3),
-          orderBy("created_at", "desc"),
-          limit(6)
+          where("approved", "==", true)
         );
         const snapshot = await getDocs(q);
-        const docs = snapshot.docs.map(doc => doc.data() as { rating: number; comment?: string; tool?: string });
-        // Return randomized top 3-6 reviews gracefully
-        return docs.filter(d => d.comment && d.comment.trim().length > 0).sort(() => 0.5 - Math.random());
+        const docs = snapshot.docs.map(doc => doc.data() as { rating: number; comment?: string; tool?: string; created_at?: any });
+
+        // Filter out bad ones and sort latest client-side
+        const validDocs = docs
+          .filter(d => d.rating >= 3 && d.comment && d.comment.trim().length > 0)
+          .sort((a, b) => {
+            const timeA = a.created_at?.seconds || 0;
+            const timeB = b.created_at?.seconds || 0;
+            return timeB - timeA; // Descending
+          });
+
+        // Choose from newest 20 randomly to display 6
+        return validDocs.slice(0, 20).sort(() => 0.5 - Math.random()).slice(0, 6);
       } catch (e) {
         console.error("Reviews fetch failed", e);
         return [];
