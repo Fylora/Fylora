@@ -44,7 +44,6 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/tools" element={<ToolsPage />} />
-            <Route path="/tool/:toolId" element={<ToolPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/careers" element={<CareersPage />} />
@@ -55,6 +54,7 @@ const App = () => (
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/request-feature" element={<FeatureRequestPage />} />
             <Route path="/journey" element={<JourneyPage />} />
+            <Route path="/:toolId" element={<ToolPage />} /> {/* Fallback dynamically captures tool slugs */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

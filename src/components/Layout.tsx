@@ -143,7 +143,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   FYLORA
                 </span>
               </Link>
-              <h3 className="font-display font-medium text-foreground text-lg mb-4">Files You Love, Organized Right Away</h3>
+              <h3 className="font-display font-medium text-foreground text-lg mb-4">Fylora &mdash; Files You Love, Organized Right Away</h3>
               <p className="text-muted-foreground text-base leading-relaxed mb-6 max-w-sm">
                 A modern, privacy-first PDF toolkit designed for everyday work. Built to be fast, secure, and thoughtfully simple.
               </p>
@@ -159,11 +159,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <nav className="flex flex-col gap-3">
                 <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">Our Services</Link>
                 <Link to="/tools" className="text-muted-foreground hover:text-primary transition-colors">All Tools</Link>
-                <Link to="/tool/merge" className="text-muted-foreground hover:text-primary transition-colors">Merge PDF</Link>
-                <Link to="/tool/compress" className="text-muted-foreground hover:text-primary transition-colors">Compress PDF</Link>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">OCR Extract</a>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Redact PDF</a>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">PDF to Markdown</a>
+                <Link to="/merge-pdf" className="text-muted-foreground hover:text-primary transition-colors">Merge PDF</Link>
+                <Link to="/compress-pdf" className="text-muted-foreground hover:text-primary transition-colors">Compress PDF</Link>
+                <Link to="/ocr-pdf" className="text-muted-foreground hover:text-primary transition-colors">OCR Extract</Link>
+                <Link to="/redact-pdf" className="text-muted-foreground hover:text-primary transition-colors">Redact PDF</Link>
+                <Link to="/pdf-to-md" className="text-muted-foreground hover:text-primary transition-colors">PDF to Markdown</Link>
               </nav>
             </div>
 

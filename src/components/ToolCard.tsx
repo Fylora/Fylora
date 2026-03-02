@@ -7,7 +7,7 @@ const ToolCard = ({ tool }: { tool: Tool }) => {
   return (
     <motion.div whileHover={{ y: -4, scale: 1.01 }} whileTap={{ scale: 0.98 }}>
       <Link
-        to={`/tool/${tool.id}`}
+        to={`/${tool.id}`}
         className="group relative flex flex-col p-6 rounded-3xl bg-card border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-400 overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

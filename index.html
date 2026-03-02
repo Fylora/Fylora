@@ -27,41 +27,76 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advanced Free Online PDF Tools - Fast, Private &amp; Ad-Free</title>
+  <title>Fylora | Free Online PDF Tools – Merge, Split, Compress & More</title>
   <meta name="description"
-    content="Free online PDF tools. Merge, split, compress, OCR, and edit PDFs instantly. 100% private, client-side processing, with zero ads." />
+    content="Free online PDF tools. Merge, split, compress, convert, and edit PDFs instantly. 100% private, fast, and secure. No sign-up required." />
+  <meta name="keywords" content="pdf tools, merge pdf, split pdf, compress pdf, pdf to word, free pdf editor" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fylora.online/" />
   <link rel="alternate" hreflang="x-default" href="https://fylora.online/" />
   <link rel="alternate" hreflang="en" href="https://fylora.online/" />
 
+  <!-- Favicon setup -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/favicon-192x192.png" />
 
-  <meta property="og:title" content="Advanced Free Online PDF Tools - Fast, Private &amp; Ad-Free" />
+  <meta property="og:title" content="Fylora | Free Online PDF Tools – Merge, Split, Compress & More" />
   <meta property="og:description"
-    content="Free online PDF tools. Merge, split, compress, OCR, and edit PDFs instantly. 100% private, client-side processing, with zero ads." />
+    content="Free online PDF tools. Merge, split, compress, convert, and edit PDFs instantly. 100% private, fast, and secure. No sign-up required." />
   <meta property="og:url" content="https://fylora.online/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fylora" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Advanced Free Online PDF Tools - Fast, Private &amp; Ad-Free" />
+  <meta name="twitter:title" content="Fylora | Free Online PDF Tools – Merge, Split, Compress & More" />
   <meta name="twitter:description"
-    content="Free online PDF tools. Merge, split, compress, OCR, and edit PDFs instantly. 100% private, client-side processing, with zero ads." />
+    content="Free online PDF tools. Merge, split, compress, convert, and edit PDFs instantly. 100% private, fast, and secure. No sign-up required." />
 
+  <!-- Structured Data: Organization & WebSite with Sitelinks -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Fylora",
-      "url": "https://fylora.online/",
-      "description": "Free online PDF tools. Merge, split, compress, OCR, and edit PDFs instantly. 100% private, client-side processing, with zero ads.",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Fylora",
+          "url": "https://fylora.online",
+          "logo": "https://fylora.online/favicon.svg",
+          "sameAs": [
+            "https://x.com/fyloratech",
+            "https://www.instagram.com/fyloratech"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "name": "Fylora",
+          "url": "https://fylora.online",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://fylora.online/tools?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "WebApplication",
+          "name": "Fylora PDF Studio",
+          "url": "https://fylora.online/",
+          "description": "Free online PDF tools. Merge, split, compress, convert, and edit PDFs instantly. 100% private, fast, and secure. No sign-up required.",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+      ]
     }
   </script>
 </head>

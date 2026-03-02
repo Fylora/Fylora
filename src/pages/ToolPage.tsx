@@ -11,6 +11,7 @@ import { getToolById } from "@/lib/tools";
 import { processPdf } from "@/lib/pdf-processor";
 import { trackToolUsed } from "@/utils/analytics";
 import ReviewModal from "@/components/ReviewModal";
+import { useSeo } from "@/hooks/useSeo";
 
 type Status = "idle" | "processing" | "done" | "error";
 
@@ -29,6 +30,13 @@ const ToolPage = () => {
     searchText: "",
     annotationType: "highlight",
     compressLevel: "balanced",
+  });
+
+  // Dynamically update document title & meta tags upon load
+  useSeo({
+    title: tool?.seoTitle || "Free Online PDF Tools | Fylora",
+    description: tool?.description || "",
+    url: `/${toolId}`,
   });
 
   const needsMultiple = toolId === "merge" || toolId === "image-to-pdf";
@@ -287,6 +295,21 @@ const ToolPage = () => {
               </Button>
             </motion.div>
           )}
+
+          {/* SEO Content Section */}
+          <article className="mt-16 pt-12 border-t border-border prose prose-slate dark:prose-invert max-w-none text-muted-foreground">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-4">About the {tool.name} Tool</h2>
+            <p className="leading-relaxed text-base">{tool.seoContent}</p>
+
+            <h3 className="font-display text-xl font-bold text-foreground mt-8 mb-4">Related PDF Tools</h3>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-0 list-none text-sm">
+              <li><Link to="/merge-pdf" className="text-primary hover:underline font-medium">Merge PDF</Link></li>
+              <li><Link to="/compress-pdf" className="text-primary hover:underline font-medium">Compress PDF</Link></li>
+              <li><Link to="/split-pdf" className="text-primary hover:underline font-medium">Split PDF</Link></li>
+              <li><Link to="/pdf-to-word" className="text-primary hover:underline font-medium">PDF to Word</Link></li>
+            </ul>
+          </article>
+
         </motion.div>
       </div>
       {/* Full-screen Minimalist Loading Overlay for UX */}

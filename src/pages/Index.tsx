@@ -8,6 +8,7 @@ import { tools } from "@/lib/tools";
 import Layout from "@/components/Layout";
 import React, { Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useSeo } from "@/hooks/useSeo";
 
 const ToolCard = React.lazy(() => import("@/components/ToolCard"));
 
@@ -19,6 +20,13 @@ const features = [
 const Index = () => {
   const featuredTools = tools.slice(0, 8);
   const [reviewIndex, setReviewIndex] = useState(0);
+
+  // Apply explicit site SEO dynamically
+  useSeo({
+    title: "Fylora | Free Online PDF Tools – Merge, Split, Compress & More",
+    description: "Free online PDF tools. Merge, split, compress, convert, and edit PDFs instantly. 100% private, fast, and secure. No sign-up required.",
+    url: "/",
+  });
 
   const { data: reviews = [] } = useQuery({
     queryKey: ['homepage-reviews'],
