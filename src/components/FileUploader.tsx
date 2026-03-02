@@ -1,6 +1,7 @@
 import { useCallback, useState, useRef } from "react";
 import { Upload, X, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackFileUpload } from "@/utils/analytics";
 
 interface FileUploaderProps {
   accept?: string;
@@ -46,7 +47,16 @@ const FileUploader = ({
       e.preventDefault();
       setIsDragging(false);
       const valid = validateFiles(e.dataTransfer.files);
-      if (valid.length) onFilesSelected(valid);
+      if (valid.length) {
+        valid.forEach(file => {
+          trackFileUpload(
+            file.name.split('.').pop() || 'unknown',
+            file.size / (1024 * 1024),
+            'upload_drop'
+          );
+        });
+        onFilesSelected(valid);
+      }
     },
     [validateFiles, onFilesSelected]
   );
@@ -55,7 +65,16 @@ const FileUploader = ({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!e.target.files) return;
       const valid = validateFiles(e.target.files);
-      if (valid.length) onFilesSelected(valid);
+      if (valid.length) {
+        valid.forEach(file => {
+          trackFileUpload(
+            file.name.split('.').pop() || 'unknown',
+            file.size / (1024 * 1024),
+            'upload_click'
+          );
+        });
+        onFilesSelected(valid);
+      }
       e.target.value = "";
     },
     [validateFiles, onFilesSelected]

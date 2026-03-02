@@ -9,6 +9,7 @@ import PrivacyBadge from "@/components/PrivacyBadge";
 import { Button } from "@/components/ui/button";
 import { getToolById } from "@/lib/tools";
 import { processPdf } from "@/lib/pdf-processor";
+import { trackToolUsed } from "@/utils/analytics";
 
 type Status = "idle" | "processing" | "done" | "error";
 
@@ -61,6 +62,20 @@ const ToolPage = () => {
         origin: { y: 0.6 },
         colors: ['#3b82f6', '#8b5cf6', '#ec4899', '#10b981']
       });
+
+      // Track successful tool usage in GA4
+      const inputType = files[0]?.name.split('.').pop() || "unknown";
+
+      let outputType = "pdf"; // Default assumption
+      if (blob.type === "application/zip" || toolId === "split" || toolId === "pdf-to-image") {
+        outputType = "zip";
+      } else if (blob.type === "text/plain") {
+        outputType = "txt";
+      } else if (blob.type === "text/markdown") {
+        outputType = "md";
+      }
+
+      trackToolUsed(tool.name, inputType, outputType);
     } catch (err: unknown) {
       setErrorMsg(err instanceof Error ? err.message : "Processing failed");
       setStatus("error");
