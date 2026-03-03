@@ -15,6 +15,7 @@ const navLinks = [
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileToolsOpen, setMobileToolsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -159,40 +160,49 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   if (isTools) {
                     return (
                       <div key={link.to} className="flex flex-col">
-                        <div className="flex items-center justify-between px-4 py-2.5 rounded-md text-sm font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-muted relative">
-                          <Link
-                            to={link.to}
-                            onClick={() => setMobileOpen(false)}
-                            className="absolute inset-0"
-                          ></Link>
+                        <button
+                          onClick={() => setMobileToolsOpen(!mobileToolsOpen)}
+                          className={`flex items-center justify-between px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${mobileToolsOpen ? "text-primary bg-primary/5" : "text-muted-foreground hover:text-foreground hover:bg-muted"}`}
+                        >
                           <span>{link.label}</span>
-                          <ChevronDown className="h-4 w-4 pointer-events-none" />
-                        </div>
+                          <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileToolsOpen ? "-rotate-180" : ""}`} />
+                        </button>
 
                         {/* Mobile tools list inside accordion */}
-                        <div className="pl-6 pr-4 py-3 pb-4 flex flex-col gap-5 border-l-2 border-border ml-5 mt-1 bg-muted/20 rounded-lg">
-                          {["core", "convert", "advanced"].map(category => (
-                            <div key={category} className="flex flex-col gap-2">
-                              <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
-                                {category === "core" ? "Essential Tools" : category === "convert" ? "Convert PDF" : "Advanced & Security"}
-                              </h3>
-                              {tools.filter(t => t.category === category).map(tool => {
-                                const Icon = tool.icon;
-                                return (
-                                  <Link
-                                    key={tool.id}
-                                    to={`/${tool.id}`}
-                                    onClick={() => setMobileOpen(false)}
-                                    className={`flex items-center gap-3 py-1.5 transition-colors ${location.pathname === `/${tool.id}` ? "text-primary font-semibold" : "text-muted-foreground hover:text-foreground"}`}
-                                  >
-                                    <Icon className="h-4 w-4 shrink-0" />
-                                    <span className="text-sm line-clamp-1">{tool.name}</span>
-                                  </Link>
-                                );
-                              })}
-                            </div>
-                          ))}
-                        </div>
+                        <AnimatePresence>
+                          {mobileToolsOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pl-6 pr-4 py-3 pb-4 flex flex-col gap-5 border-l-2 border-border ml-5 mt-1 bg-muted/20 rounded-lg">
+                                {["core", "convert", "advanced"].map(category => (
+                                  <div key={category} className="flex flex-col gap-2">
+                                    <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
+                                      {category === "core" ? "Essential Tools" : category === "convert" ? "Convert PDF" : "Advanced & Security"}
+                                    </h3>
+                                    {tools.filter(t => t.category === category).map(tool => {
+                                      const Icon = tool.icon;
+                                      return (
+                                        <Link
+                                          key={tool.id}
+                                          to={`/${tool.id}`}
+                                          onClick={() => setMobileOpen(false)}
+                                          className={`flex items-center gap-3 py-1.5 transition-colors ${location.pathname === `/${tool.id}` ? "text-primary font-semibold" : "text-muted-foreground hover:text-foreground"}`}
+                                        >
+                                          <Icon className="h-4 w-4 shrink-0" />
+                                          <span className="text-sm line-clamp-1">{tool.name}</span>
+                                        </Link>
+                                      );
+                                    })}
+                                  </div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                     );
                   }
