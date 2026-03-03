@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { X, Star, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -16,6 +17,11 @@ const ReviewModal = ({ isOpen, onClose, toolName }: ReviewModalProps) => {
     const [comment, setComment] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleSubmit = async () => {
         if (rating === 0) return;
@@ -53,10 +59,12 @@ const ReviewModal = ({ isOpen, onClose, toolName }: ReviewModalProps) => {
         }
     };
 
-    return (
+    if (!mounted) return null;
+
+    return createPortal(
         <AnimatePresence>
             {isOpen && !submitted && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -95,8 +103,8 @@ const ReviewModal = ({ isOpen, onClose, toolName }: ReviewModalProps) => {
                                     >
                                         <Star
                                             className={`h-10 w-10 transition-colors ${star <= (hoveredRating || rating)
-                                                    ? "fill-yellow-400 text-yellow-400"
-                                                    : "fill-transparent text-muted-foreground/30"
+                                                ? "fill-yellow-400 text-yellow-400"
+                                                : "fill-transparent text-muted-foreground/30"
                                                 }`}
                                         />
                                     </button>
@@ -156,7 +164,8 @@ const ReviewModal = ({ isOpen, onClose, toolName }: ReviewModalProps) => {
                     </motion.div>
                 </div>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
     );
 };
 
