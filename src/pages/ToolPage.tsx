@@ -334,10 +334,27 @@ const ToolPage = () => {
 
             <h3 className="font-display text-xl font-bold text-foreground mt-12 mb-4 text-center">Related PDF Tools</h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-0 list-none text-center">
-              <li><Link to="/merge-pdf" className="block p-4 rounded-xl bg-card border border-white/5 hover:border-primary/50 hover:bg-primary/5 transition-colors font-medium">Merge PDF</Link></li>
-              <li><Link to="/compress-pdf" className="block p-4 rounded-xl bg-card border border-white/5 hover:border-primary/50 hover:bg-primary/5 transition-colors font-medium">Compress PDF</Link></li>
-              <li><Link to="/split-pdf" className="block p-4 rounded-xl bg-card border border-white/5 hover:border-primary/50 hover:bg-primary/5 transition-colors font-medium">Split PDF</Link></li>
-              <li><Link to="/pdf-to-word" className="block p-4 rounded-xl bg-card border border-white/5 hover:border-primary/50 hover:bg-primary/5 transition-colors font-medium">PDF to Word</Link></li>
+              {(() => {
+                // Find visually related tools
+                let related = tools.filter(t => t.category === tool.category && t.id !== tool.id);
+                // Special paired internal linking per spec
+                if (tool.id === "pdf-to-word-alias") related = tools.filter(t => t.id === "word-to-pdf");
+                else if (tool.id === "word-to-pdf") related = tools.filter(t => t.id === "pdf-to-word-alias");
+                else if (tool.id === "merge-pdf") related = tools.filter(t => t.id === "split-pdf" || t.id === "compress-pdf");
+                else if (tool.id === "split-pdf") related = tools.filter(t => t.id === "merge-pdf" || t.id === "extract-pages");
+                else if (tool.id === "protect-pdf") related = tools.filter(t => t.id === "unlock-pdf" || t.id === "pdf-security");
+                else if (tool.id === "unlock-pdf") related = tools.filter(t => t.id === "protect-pdf");
+
+                // Fallback to top category peers
+                const toShow = related.length > 0 ? related.slice(0, 4) : tools.slice(0, 4).filter(t => t.id !== tool.id);
+                return toShow.map(t => (
+                  <li key={t.id}>
+                    <Link to={`/${t.id}`} className="block p-4 rounded-xl bg-card border border-white/5 hover:border-primary/50 hover:bg-primary/5 transition-colors font-medium">
+                      {t.name}
+                    </Link>
+                  </li>
+                ));
+              })()}
             </ul>
           </article>
 
