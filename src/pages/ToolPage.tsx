@@ -7,7 +7,7 @@ import Layout from "@/components/Layout";
 import FileUploader from "@/components/FileUploader";
 import PrivacyBadge from "@/components/PrivacyBadge";
 import { Button } from "@/components/ui/button";
-import { getToolById } from "@/lib/tools";
+import { getToolById, tools } from "@/lib/tools";
 import { processPdf } from "@/lib/pdf-processor";
 import { trackToolUsed } from "@/utils/analytics";
 import ReviewModal from "@/components/ReviewModal";
@@ -365,7 +365,7 @@ const ToolPage = () => {
               "@graph": [
                 {
                   "@type": "FAQPage",
-                  "mainEntity": tool.seoFaqs.map(faq => ({
+                  "mainEntity": (tool.seoFaqs || []).map(faq => ({
                     "@type": "Question",
                     "name": faq.question,
                     "acceptedAnswer": {
@@ -377,8 +377,8 @@ const ToolPage = () => {
                 {
                   "@type": "HowTo",
                   "name": `How to use the ${tool.name} tool securely`,
-                  "description": tool.seoDefinition,
-                  "step": tool.seoSteps.map((step, i) => ({
+                  "description": tool.seoDefinition || tool.description,
+                  "step": (tool.seoSteps || []).map((step, i) => ({
                     "@type": "HowToStep",
                     "name": step.name,
                     "text": step.description,
