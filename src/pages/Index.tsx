@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Shield, Zap, Lock, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { tools } from "@/lib/tools";
 import Layout from "@/components/Layout";
@@ -21,7 +21,6 @@ const Index = () => {
   const featuredTools = tools.slice(0, 8);
   const [reviewIndex, setReviewIndex] = useState(0);
 
-  // Apply explicit site SEO dynamically
   useSeo({
     title: "Fylora | Free Online PDF Tools – Merge, Split, Compress & More",
     description: "Free online PDF tools. Merge, split, compress, convert, and edit PDFs instantly. 100% private, fast, and secure. No sign-up required.",
@@ -33,7 +32,6 @@ const Index = () => {
     queryFn: async () => {
       if (!db) return [];
       try {
-        // Fetch approved reviews only (avoids Firebase composite index requirements)
         const q = query(
           collection(db, "reviews"),
           where("approved", "==", true)
@@ -41,26 +39,21 @@ const Index = () => {
         const snapshot = await getDocs(q);
         const docs = snapshot.docs.map(doc => doc.data() as { rating: number; comment?: string; tool?: string; created_at?: any });
 
-        // Filter out bad ones and sort latest client-side
         const validDocs = docs
-          .filter(d => d.rating >= 3 && (
-            (d.comment && d.comment.trim().length > 0) ||
-            (d.rating === 5)
-          ))
+          .filter(d => d.rating > 3)
           .sort((a, b) => {
             const timeA = a.created_at?.seconds || 0;
             const timeB = b.created_at?.seconds || 0;
-            return timeB - timeA; // Descending
+            return timeB - timeA;
           });
 
-        // Choose from newest 20 randomly to display 6
-        return validDocs.slice(0, 20).sort(() => 0.5 - Math.random()).slice(0, 6);
+        return validDocs.slice(0, 9);
       } catch (e) {
         console.error("Reviews fetch failed", e);
         return [];
       }
     },
-    staleTime: 1000 * 60 * 60, // 1 hour static cache
+    staleTime: 1000 * 60 * 60,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
@@ -69,12 +62,9 @@ const Index = () => {
     <Layout>
       {/* Hero */}
       <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 flex items-center justify-center">
-        {/* Animated Glow Blobs */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] opacity-50 mix-blend-screen pointer-events-none animate-[pulse_8s_ease-in-out_infinite]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/4 -translate-y-1/3 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[100px] opacity-40 mix-blend-screen pointer-events-none animate-[pulse_10s_ease-in-out_infinite_reverse]" />
-
         <div className="absolute inset-0 bg-[image:var(--fylora-gradient-soft)] opacity-40 dark:opacity-20" />
-
         <div className="relative container z-10 max-w-5xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -93,18 +83,15 @@ const Index = () => {
                 100% Private & Client-Side
               </span>
             </motion.div>
-
             <h1 className="font-display font-bold text-foreground leading-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 text-balance flex flex-col items-center text-center">
               <span>Free Online PDF Tools</span>
               <span className="block w-full text-center fylora-gradient-text mt-1 sm:mt-2">
                 Fast & Ad-Free
               </span>
             </h1>
-
             <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light">
               Merge, split, compress, convert, and protect. The fastest PDF studio that never uploads your files to a server.
             </p>
-
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -182,9 +169,7 @@ const Index = () => {
             <h2 className="font-display text-3xl font-bold text-foreground mb-3">Loved by Users</h2>
             <p className="text-muted-foreground">Hear what our community says about Fylora.</p>
           </div>
-
           <div className="relative max-w-6xl mx-auto px-12 sm:px-16">
-            {/* Left Arrow */}
             <Button
               variant="outline"
               size="icon"
@@ -194,7 +179,6 @@ const Index = () => {
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
-
             <div className="overflow-hidden py-4">
               <motion.div
                 className="flex gap-4 sm:gap-6"
@@ -239,8 +223,6 @@ const Index = () => {
                 ))}
               </motion.div>
             </div>
-
-            {/* Right Arrow */}
             <Button
               variant="outline"
               size="icon"
@@ -250,8 +232,6 @@ const Index = () => {
             >
               <ChevronRight className="h-6 w-6" />
             </Button>
-
-            {/* Mobile Swipe Indicators */}
             <div className="flex sm:hidden justify-center gap-2 mt-6">
               {Array.from({ length: reviews.length }).map((_, i) => (
                 <div
@@ -274,7 +254,6 @@ const Index = () => {
           <p className="text-muted-foreground leading-relaxed mb-10">
             Unlike traditional cloud-based services that demand you wait for uploads to finish, Fylora runs directly in your browser. This means you skip the line. Instantly access the tools you need and get your work done faster than ever before.
           </p>
-
           <h3 className="font-display text-2xl font-bold text-foreground mb-4">Comprehensive Features for Every Need</h3>
           <p className="text-muted-foreground leading-relaxed mb-4">
             Our platform is organized to provide a complete suite of document utilities right away:
@@ -285,7 +264,6 @@ const Index = () => {
             <li><strong>Image Utilities:</strong> Convert your PDFs to JPGs or PNG formats, extract embedded images, and compress photos down to shareable sizes.</li>
             <li><strong>Security:</strong> Add passwords to restrict access, apply watermarks to protect your intellectual property, or remove annoying restrictions from PDFs you already own.</li>
           </ul>
-
           <h3 className="font-display text-2xl font-bold text-foreground mb-4">Why Fylora is Different: Security & Privacy First</h3>
           <p className="text-muted-foreground leading-relaxed mb-6">
             When you use a generic online PDF editor, your highly sensitive documents—such as tax returns, legal contracts, or confidential business proposals—are uploaded to remote servers. This introduces a massive privacy vulnerability. Fylora is built differently. We utilize cutting-edge WebAssembly (Wasm) and client-side processing technologies.
@@ -293,7 +271,6 @@ const Index = () => {
           <p className="text-muted-foreground leading-relaxed mb-10">
             <strong>What does this mean for you?</strong> It means your files never leave your device. The heavy lifting—whether you are merging a 500-page manuscript or applying OCR to a blurry scan—happens utilizing your computer's own processing power. Because we don't upload your data to our servers, we couldn't read your files even if we wanted to. No uploads, no downloads, and absolutely no data retention.
           </p>
-
           <h3 className="font-display text-2xl font-bold text-foreground mb-4">Who is Fylora Built For?</h3>
           <div className="grid sm:grid-cols-3 gap-6 mb-8 mt-6">
             <div className="p-6 bg-card border border-white/5 rounded-2xl shadow-sm">
@@ -309,7 +286,6 @@ const Index = () => {
               <p className="text-sm text-muted-foreground">Quickly extract high-quality images from moodboard PDFs and convert assets effortlessly for social media.</p>
             </div>
           </div>
-
           <p className="text-muted-foreground leading-relaxed">
             Stop waiting for file uploads and dealing with subscription popups. Experience the fastest, most private way to manage your documents. Explore Fylora today and get your files organized right away.
           </p>
