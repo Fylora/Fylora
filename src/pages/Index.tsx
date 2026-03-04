@@ -294,7 +294,7 @@ const Index = () => {
             </div>
           </div>
 
-          <p className="text-muted-foreground leading-loose text-lg font-light mt-12 text-center">
+          <p className="text-muted-foreground leading-loose text-lg font-light mt-12 text-center px-[75px] max-sm:px-6">
             Stop waiting for file uploads and dealing with subscription popups. Experience the fastest, most private way to manage your documents. Explore Fylora today and get your files organized right away.
           </p>
         </div>
