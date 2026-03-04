@@ -94,16 +94,16 @@ const BlogPostPage = () => {
                             )}
                         </header>
 
-                        <div className="prose prose-lg md:prose-xl dark:prose-invert prose-headings:font-display prose-a:text-primary max-w-none text-muted-foreground leading-loose">
-                            <div className="mb-12 space-y-6">
+                        <div className="text-base md:text-lg text-muted-foreground leading-relaxed md:leading-10">
+                            <div className="mb-10 space-y-6">
                                 {post.content.intro.map((paragraph, i) => (
                                     <p key={i}>{paragraph}</p>
                                 ))}
                             </div>
 
                             {post.content.sections.map((section, idx) => (
-                                <section key={idx} className="mb-12">
-                                    <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 font-display">{section.heading}</h2>
+                                <section key={idx} className="mb-10">
+                                    <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 font-display">{section.heading}</h2>
                                     <div className="space-y-6">
                                         {section.paragraphs.map((p, i) => (
                                             <p key={i}>{p}</p>
