@@ -245,7 +245,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </main>
 
       <footer className="border-t border-white/10 bg-card">
-        <div className="container py-12 md:py-16 lg:py-20">
+        <div className="container py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
 
             {/* BRANDING */}
@@ -268,7 +268,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
             {/* PRODUCT */}
             <div className="flex flex-col gap-4">
-              <h4 className="font-display font-semibold text-foreground tracking-wide">Product</h4>
+              <h4 className="font-display font-semibold text-foreground tracking-wide pt-1.5">Product</h4>
               <nav className="flex flex-col gap-3">
                 <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">Our Services</Link>
                 <Link to="/tools" className="text-muted-foreground hover:text-primary transition-colors">All Tools</Link>
@@ -282,7 +282,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
             {/* COMPANY */}
             <div className="flex flex-col gap-4">
-              <h4 className="font-display font-semibold text-foreground tracking-wide">Company</h4>
+              <h4 className="font-display font-semibold text-foreground tracking-wide pt-1.5">Company</h4>
               <nav className="flex flex-col gap-3">
                 <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">About Fylora</Link>
                 <Link to="/journey" className="text-muted-foreground hover:text-primary transition-colors">Our Journey</Link>
@@ -295,7 +295,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
             {/* RESOURCES */}
             <div className="flex flex-col gap-4">
-              <h4 className="font-display font-semibold text-foreground tracking-wide">Resources</h4>
+              <h4 className="font-display font-semibold text-foreground tracking-wide pt-1.5">Resources</h4>
               <nav className="flex flex-col gap-3">
                 <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
                 <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link>
