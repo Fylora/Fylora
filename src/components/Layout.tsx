@@ -285,6 +285,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <h4 className="font-display font-semibold text-foreground tracking-wide pt-1.5">Company</h4>
               <nav className="flex flex-col gap-3">
                 <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">About Fylora</Link>
+                <Link to="/blog" className="text-muted-foreground hover:text-primary transition-colors">Blog</Link>
                 <Link to="/journey" className="text-muted-foreground hover:text-primary transition-colors">Our Journey</Link>
                 <Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors">Careers</Link>
                 <Link to="/roadmap" className="text-muted-foreground hover:text-primary transition-colors">Roadmap</Link>
