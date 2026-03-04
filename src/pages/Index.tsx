@@ -66,7 +66,7 @@ const Index = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] opacity-50 mix-blend-screen pointer-events-none animate-[pulse_8s_ease-in-out_infinite]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/4 -translate-y-1/3 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] opacity-40 mix-blend-screen pointer-events-none animate-[pulse_10s_ease-in-out_infinite_reverse]" />
         <div className="absolute inset-0 bg-[image:var(--fylora-gradient-soft)] opacity-40 dark:opacity-20" />
-        <div className="relative container z-10 max-w-5xl mx-auto px-6 text-center">
+        <div className="relative container z-10 max-w-5xl mx-auto px-[75px] max-sm:px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -114,7 +114,7 @@ const Index = () => {
       </section>
 
       {/* Features */}
-      <section className="container pt-8 pb-12 md:pt-12 md:pb-16 relative z-20">
+      <section className="container px-[75px] max-sm:px-6 pt-8 pb-12 md:pt-12 md:pb-16 relative z-20">
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {features.map((f, i) => (
             <motion.div
@@ -137,7 +137,7 @@ const Index = () => {
 
       {/* Popular Tools */}
       <section className="py-12 md:py-16 bg-muted/30 dark:bg-muted/10 border-y border-border/40">
-        <div className="container">
+        <div className="container px-[75px] max-sm:px-6">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="font-display text-3xl font-bold text-foreground mb-4">Popular Tools</h2>
             <p className="text-muted-foreground text-lg">Get started with our most-used PDF tools</p>
@@ -168,7 +168,7 @@ const Index = () => {
       {/* User Reviews */}
       {reviews.length > 0 && (
         <section className="py-12 md:py-16 bg-background">
-          <div className="container">
+          <div className="container px-[75px] max-sm:px-6">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="font-display text-3xl font-bold text-foreground mb-4">Loved by Users</h2>
               <p className="text-muted-foreground text-lg">Hear what our community says about Fylora.</p>
@@ -251,7 +251,7 @@ const Index = () => {
 
       {/* SEO Content Section */}
       <section className="py-12 md:py-16 bg-muted/20 border-t border-border/50">
-        <div className="container">
+        <div className="container px-[75px] max-sm:px-6">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 prose prose-slate dark:prose-invert">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8">What is Fylora? Your Fast, Private PDF Toolkit</h2>
             <p className="text-muted-foreground leading-loose mb-8 text-lg font-light">
