@@ -64,7 +64,7 @@ const Index = () => {
       {/* Hero */}
       <section className="relative overflow-hidden pt-12 pb-10 md:pt-20 md:pb-16 flex items-center justify-center">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] opacity-50 mix-blend-screen pointer-events-none animate-[pulse_8s_ease-in-out_infinite]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/4 -translate-y-1/3 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[100px] opacity-40 mix-blend-screen pointer-events-none animate-[pulse_10s_ease-in-out_infinite_reverse]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/4 -translate-y-1/3 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] opacity-40 mix-blend-screen pointer-events-none animate-[pulse_10s_ease-in-out_infinite_reverse]" />
         <div className="absolute inset-0 bg-[image:var(--fylora-gradient-soft)] opacity-40 dark:opacity-20" />
         <div className="relative container z-10 max-w-5xl mx-auto px-6 text-center">
           <motion.div
@@ -80,7 +80,7 @@ const Index = () => {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background border border-border shadow-sm text-sm font-medium mb-6"
             >
               <Shield className="h-4 w-4 text-primary" />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-500">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
                 100% Private & Client-Side
               </span>
             </motion.div>
@@ -136,7 +136,7 @@ const Index = () => {
       </section>
 
       {/* Popular Tools */}
-      <section className="py-12 md:py-16 bg-slate-50/50 dark:bg-slate-900/20 border-y border-border/40">
+      <section className="py-12 md:py-16 bg-muted/30 dark:bg-muted/10 border-y border-border/40">
         <div className="container">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="font-display text-3xl font-bold text-foreground mb-4">Popular Tools</h2>
@@ -214,7 +214,7 @@ const Index = () => {
                         <div>
                           <div className="flex gap-1 mb-4">
                             {Array.from({ length: 5 }).map((_, idx) => (
-                              <Star key={idx} className={`h-4 w-4 ${idx < r.rating ? 'fill-yellow-400 text-yellow-400' : 'fill-transparent text-muted-foreground/30'}`} />
+                              <Star key={idx} className={`h-4 w-4 ${idx < r.rating ? 'fill-primary text-primary' : 'fill-transparent text-muted-foreground/30'}`} />
                             ))}
                           </div>
                           <p className="text-foreground leading-relaxed italic">

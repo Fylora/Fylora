@@ -70,7 +70,7 @@ const ToolPage = () => {
         particleCount: 150,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ['#3b82f6', '#8b5cf6', '#ec4899', '#10b981']
+        colors: ['#2487FB', '#60A5FA', '#93C5FD', '#BFDBFE', '#FFFFFF']
       });
 
       // Track successful tool usage in GA4
@@ -296,7 +296,7 @@ const ToolPage = () => {
               <div className="absolute inset-0 fylora-gradient-bg opacity-5 pointer-events-none" />
               <motion.div
                 initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.1, bounce: 0.5 }}
-                className="mx-auto h-20 w-20 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center mb-6"
+                className="mx-auto h-20 w-20 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6"
               >
                 <CheckCircle2 className="h-10 w-10" />
               </motion.div>
@@ -309,7 +309,7 @@ const ToolPage = () => {
           )}
 
           {/* SEO Content Section */}
-          <article className="mt-16 pt-12 border-t border-border prose prose-slate dark:prose-invert max-w-none text-muted-foreground">
+          <article className="mt-16 pt-12 border-t border-border prose max-w-none text-muted-foreground">
             <h2 className="font-display text-2xl font-bold text-foreground mb-4">About the {tool.name} Tool</h2>
             <p className="leading-relaxed text-base">{tool.seoContent}</p>
 
@@ -336,10 +336,10 @@ const ToolPage = () => {
             <div className="my-12 p-8 rounded-3xl bg-secondary/30 border border-white/5">
               <h2 className="font-display text-2xl font-bold text-foreground mb-6 text-center">Why choose Fylora over other PDF tools?</h2>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 list-none p-0">
-                <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-green-500 shrink-0 mt-0.5" /><span><strong>No forced sign-up:</strong> Start processing instantly.</span></li>
-                <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-green-500 shrink-0 mt-0.5" /><span><strong>Faster processing:</strong> Harnessing local WebAssembly speeds.</span></li>
-                <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-green-500 shrink-0 mt-0.5" /><span><strong>100% private:</strong> Your files never upload to our servers.</span></li>
-                <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-green-500 shrink-0 mt-0.5" /><span><strong>Minimal interface:</strong> Zero annoying pop-up limits or chaotic ads.</span></li>
+                <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" /><span><strong>No forced sign-up:</strong> Start processing instantly.</span></li>
+                <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" /><span><strong>Faster processing:</strong> Harnessing local WebAssembly speeds.</span></li>
+                <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" /><span><strong>100% private:</strong> Your files never upload to our servers.</span></li>
+                <li className="flex items-start gap-3"><CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" /><span><strong>Minimal interface:</strong> Zero annoying pop-up limits or chaotic ads.</span></li>
               </ul>
             </div>
 
