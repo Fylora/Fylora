@@ -140,8 +140,8 @@ const BlogPostPage = () => {
 
                                 {relatedTool && (
                                     <div className="mt-8">
-                                        <Button asChild size="lg" className="w-full sm:w-auto h-14 rounded-full px-8 fylora-gradient-bg border-0 text-white shadow-lg hover:shadow-xl transition-all">
-                                            <Link to={`/${relatedTool.id}`}>
+                                        <Button asChild size="lg" className="w-full sm:w-auto h-14 rounded-full px-8 fylora-gradient-bg border-0 shadow-lg hover:shadow-xl transition-all">
+                                            <Link to={`/${relatedTool.id}`} className="!text-white !no-underline hover:!text-white">
                                                 Launch the {relatedTool.name} Tool <ArrowRight className="w-5 h-5 ml-2" />
                                             </Link>
                                         </Button>
