@@ -53,10 +53,18 @@ const BlogIndexPage = () => {
                                 className="group flex flex-col h-full bg-card rounded-3xl border border-white/5 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
                             >
                                 <Link to={`/blog/${post.slug}`} className="flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary rounded-3xl">
-                                    <div className="aspect-[16/10] bg-muted/40 relative overflow-hidden flex items-center justify-center border-b border-border/50">
-                                        <span className="p-4 bg-background/50 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                                            <FileText className="w-12 h-12 text-primary opacity-60" />
-                                        </span>
+                                    <div className="aspect-[16/10] bg-muted/40 relative overflow-hidden flex items-center justify-center border-b border-border/50 group-hover:bg-muted transition-colors">
+                                        {post.featuredImage ? (
+                                            <img
+                                                src={post.featuredImage}
+                                                alt={post.title}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                                            />
+                                        ) : (
+                                            <span className="p-4 bg-background/50 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                                                <FileText className="w-12 h-12 text-primary opacity-60" />
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="p-8 flex flex-col flex-grow">
                                         <time className="text-primary text-sm font-semibold tracking-wider mb-4 block uppercase opacity-90">{post.date}</time>

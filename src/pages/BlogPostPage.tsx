@@ -79,9 +79,19 @@ const BlogPostPage = () => {
                             <h1 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
                                 {post.title}
                             </h1>
-                            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light">
+                            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light mb-8">
                                 {post.metaDescription}
                             </p>
+
+                            {post.featuredImage && (
+                                <div className="w-full aspect-video md:aspect-[21/9] rounded-3xl overflow-hidden shadow-lg border border-border/50 bg-muted/30 mb-12">
+                                    <img
+                                        src={post.featuredImage}
+                                        alt={`Featured artwork for ${post.title}`}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            )}
                         </header>
 
                         <div className="prose prose-lg md:prose-xl dark:prose-invert prose-headings:font-display prose-a:text-primary max-w-none text-muted-foreground leading-loose">
@@ -132,7 +142,7 @@ const BlogPostPage = () => {
                                     <div className="mt-8">
                                         <Button asChild size="lg" className="w-full sm:w-auto h-14 rounded-full px-8 fylora-gradient-bg border-0 text-white shadow-lg hover:shadow-xl transition-all">
                                             <Link to={`/${relatedTool.id}`}>
-                                                Try the {relatedTool.name} Tool <ArrowRight className="w-5 h-5 ml-2" />
+                                                Launch the {relatedTool.name} Tool <ArrowRight className="w-5 h-5 ml-2" />
                                             </Link>
                                         </Button>
                                     </div>

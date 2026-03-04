@@ -3,6 +3,7 @@ export interface BlogPost {
     slug: string;
     metaDescription: string;
     date: string;
+    featuredImage: string;
     relatedToolId?: string;
     content: {
         intro: string[];
@@ -25,6 +26,7 @@ export const blogPosts: BlogPost[] = [
         slug: "compress-pdf-without-losing-quality",
         metaDescription: "Learn how to compress a PDF without losing quality using a fast, secure, and private method. No login required. Step-by-step guide included.",
         date: "2024-03-01",
+        featuredImage: "/images/blog/compress.png",
         relatedToolId: "compress-pdf",
         content: {
             intro: [
@@ -91,6 +93,7 @@ export const blogPosts: BlogPost[] = [
         slug: "merge-pdf-files-online-free",
         metaDescription: "Learn how to merge multiple PDF files into one document online for free. Secure, fast, and no account needed.",
         date: "2024-03-02",
+        featuredImage: "/images/blog/merge.png",
         relatedToolId: "merge-pdf",
         content: {
             intro: [
@@ -157,6 +160,7 @@ export const blogPosts: BlogPost[] = [
         slug: "convert-pdf-to-word-without-formatting-loss",
         metaDescription: "Convert PDF to Word without losing formatting using a secure and accurate method. Step-by-step instructions included.",
         date: "2024-03-03",
+        featuredImage: "/images/blog/word.png",
         relatedToolId: "pdf-to-word-alias",
         content: {
             intro: [
@@ -216,6 +220,7 @@ export const blogPosts: BlogPost[] = [
         slug: "is-it-safe-to-use-online-pdf-tools",
         metaDescription: "Are online PDF tools safe? Learn how file processing works and how to protect your documents when using online tools.",
         date: "2024-03-04",
+        featuredImage: "/images/blog/security.png",
         relatedToolId: "protect-pdf",
         content: {
             intro: [
@@ -265,6 +270,7 @@ export const blogPosts: BlogPost[] = [
         slug: "reduce-pdf-size-for-email",
         metaDescription: "Reduce PDF file size for email under 10MB using a fast and secure compression method. Step-by-step guide included.",
         date: "2024-03-05",
+        featuredImage: "/images/blog/email.png",
         relatedToolId: "compress-pdf",
         content: {
             intro: [
