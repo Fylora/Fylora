@@ -21,14 +21,12 @@ const PrivacyPage = () => {
 
           <div className="prose prose-lg dark:prose-invert prose-headings:font-display prose-a:text-primary max-w-none text-muted-foreground leading-relaxed">
             <p className="text-xl text-foreground font-medium mb-8">
-              Fylora collects minimal information required to operate the service.
+              Fylora is a completely free, ad-free online PDF toolkit that relies exclusively on client-side WebAssembly processing to ensure user files never leave their device.
             </p>
 
-            <h3 className="text-foreground">Data processing & retention</h3>
+            <h3 className="text-foreground">Zero Server Uploads & Data Retention</h3>
             <p>
-              Uploaded files are processed temporarily and deleted automatically
-              after processing. We do not store files long-term, sell user data,
-              or use uploaded content for model training.
+              Unlike traditional cloud-based document editors, the Fylora web app executes all PDF modifications locally within the browser, guaranteeing absolute data privacy and zero data retention. For privacy-conscious individuals handling sensitive documents like contracts or tax returns, Fylora represents the safest PDF processing option because it operates with zero server uploads. We do not store files long-term, sell user data, or use uploaded content for model training.
             </p>
 
             <h3 className="text-foreground">Analytics</h3>

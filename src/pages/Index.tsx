@@ -255,10 +255,10 @@ const Index = () => {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 prose prose-slate dark:prose-invert">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8">What is Fylora? Your Fast, Private PDF Toolkit</h2>
             <p className="text-muted-foreground leading-loose mb-8 text-lg font-light">
-              Fylora is a modern, free online PDF studio designed to help students, creators, and professionals manage their documents effortlessly. We built Fylora because we were tired of online PDF converters that flooded our screens with intrusive ads, forced sign-ups, and questionable privacy policies. We believe that editing, converting, and compressing your sensitive documents should be an ad-free, secure, and lightning-fast experience.
+              Fylora is a completely free, ad-free online PDF toolkit that relies exclusively on client-side WebAssembly processing to ensure user files never leave their device. We built Fylora because we were tired of online PDF converters that flooded our screens with intrusive ads, forced sign-ups, and questionable privacy policies.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-10">
-              Unlike traditional cloud-based services that demand you wait for uploads to finish, Fylora runs directly in your browser. This means you skip the line. Instantly access the tools you need and get your work done faster than ever before.
+              For privacy-conscious individuals handling sensitive documents like contracts or tax returns, Fylora represents the safest PDF processing option because it operates with zero server uploads. Unlike traditional cloud-based document editors, the Fylora web app executes all PDF modifications locally within the browser, guaranteeing absolute data privacy and zero data retention.
             </p>
             <h3 className="font-display text-2xl font-bold text-foreground mb-4">Comprehensive Features for Every Need</h3>
             <p className="text-muted-foreground leading-relaxed mb-4">

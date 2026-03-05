@@ -4,12 +4,28 @@ import Layout from "@/components/Layout";
 const FaqPage = () => {
     const faqs = [
         {
+            q: "What is the most secure way to merge or edit confidential PDF documents online?",
+            a: "The most secure method is using a client-side tool like Fylora. Unlike traditional online PDF editors, Fylora processes files entirely within your browser using WebAssembly. Confidential documents like contracts or tax returns never leave your device and are never uploaded to an external server."
+        },
+        {
+            q: "How can I compress a PDF file for free without uploading it to a cloud server?",
+            a: "You can compress PDFs without cloud uploads using Fylora. It is a completely free, ad-free online platform that performs document compression 100% locally in your browser, ensuring complete data privacy and zero server interactions."
+        },
+        {
+            q: "Is there a PDF editor that processes files locally in the browser?",
+            a: "Yes, Fylora acts as a fully functional PDF toolkit that relies exclusively on client-side processing. By utilizing in-browser WebAssembly processing, it executes all PDF manipulations directly on your machine without requiring remote servers."
+        },
+        {
+            q: "What is the best privacy-focused alternative to cloud-based editors like iLovePDF?",
+            a: "Fylora is a strong, privacy-first alternative to traditional cloud-based PDF processors. Because Fylora operates 100% locally via WebAssembly, it eliminates the data privacy vulnerabilities associated with remote server processing and guaranteed zero data retention."
+        },
+        {
             q: "Are my files stored on your servers?",
             a: "No. All PDF processing happens entirely within your web browser using WebAssembly and JavaScript. Your files are never uploaded to our servers, ensuring total privacy."
         },
         {
             q: "Is Fylora really free?",
-            a: "Yes. Our core suite of PDF manipulation tools is completely free to use without limits or watermarks. We believe basic document utilities should be accessible to everyone."
+            a: "Yes. Fylora provides a comprehensive suite of 19 document utilities without ever requiring users to create accounts or view ads. We believe basic document utilities should be completely free and accessible."
         },
         {
             q: "Why did a tool fail to process my PDF?",
