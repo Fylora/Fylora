@@ -26,7 +26,7 @@ export const tools: Tool[] = [
     seoTitle: "Merge PDF Files Online For Free | Fylora",
     seoContent: "Merging your PDF files has never been easier or more secure. Fylora's Merge PDF tool allows you to combine multiple PDF documents into a single, cohesive file entirely within your web browser. Perfect for students organizing research papers, professionals compiling monthly reports, or anyone looking to declutter their digital workspace. Unlike other online document tools, Fylora processes your files client-side. This means your private files never touch our servers, ensuring 100% privacy and lightning-fast speeds. Start merging your PDFs instantly, without annoying ads or forced sign-ups.",
     seoDefinition: "Merge PDF is an online tool that allows users to combine multiple PDF files into a single document quickly and securely.",
-    seoQuickAnswer: "The fastest way to merge PDF files is using FyloraΓÇÖs online Merge PDF tool. Upload your files, arrange them, and download the combined PDF instantly ΓÇö no sign-up required.",
+    seoQuickAnswer: "The fastest way to merge PDF files is using Fylora's online Merge PDF tool. Upload your files, arrange them, and download the combined PDF instantly — no sign-up required.",
     seoSteps: [
       { name: "Upload your PDFs", description: "Select or drag and drop multiple PDF files into the tool." },
       { name: "Arrange Order", description: "Drag the files to position them exactly how you want them merged." },
@@ -96,7 +96,7 @@ export const tools: Tool[] = [
     category: "convert",
     color: "bg-primary",
     seoTitle: "Convert PDF to JPG/PNG Images Free | Fylora",
-    seoContent: "Transform your PDF documents into high-quality image files instantly with Fylora. Our PDF to JPG/PNG converter is designed for creators, designers, and professionals who need to extract visual assets or share documents as images. Everything happens securely on your own deviceΓÇöno data is ever uploaded to external servers. This unparalleled commitment to privacy means you can securely convert confidential briefings, design mockups, and financial statements to image formats without a second thought. Fast, free, and perfectly ad-free.",
+    seoContent: "Transform your PDF documents into high-quality image files instantly with Fylora. Our PDF to JPG/PNG converter is designed for creators, designers, and professionals who need to extract visual assets or share documents as images. Everything happens securely on your own device—no data is ever uploaded to external servers. This unparalleled commitment to privacy means you can securely convert confidential briefings, design mockups, and financial statements to image formats without a second thought. Fast, free, and perfectly ad-free.",
     seoDefinition: "PDF to Image is an online conversion utility that extracts standard PDF document pages and rasterizes them into individual, high-quality JPG or PNG picture files.",
     seoQuickAnswer: "Convert PDF pages to images securely by uploading them to Fylora's PDF to Image converter. The tool renders your pages locally and lets you download a folder of sharp JPGs instantly.",
     seoSteps: [
@@ -229,7 +229,7 @@ export const tools: Tool[] = [
       { question: "What type of encryption is used?", answer: "Modern PDF password utilities apply robust AES security standards, ensuring that brute-forcing the document without the password is computationally improbable." },
       { question: "Does Fylora store my password?", answer: "No. The password you type is handled dynamically in your local browser state to encrypt the file and is completely destroyed the second you refresh the page." },
       { question: "Will password protecting it prevent printing?", answer: "Standard password protection strictly prevents opening the document. Once verified, general printing features rely on user-level permissions." },
-      { question: "Can my employer bypass the password?", answer: "If a rigorous, complex password is set, the document remains utterly locked to all partiesΓÇöincluding software administratorsΓÇöunless they know the exact key." }
+      { question: "Can my employer bypass the password?", answer: "If a rigorous, complex password is set, the document remains utterly locked to all parties—including software administrators—unless they know the exact key." }
     ]
   },
   {
