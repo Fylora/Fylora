@@ -15,7 +15,7 @@ interface FileUploaderProps {
 const FileUploader = ({
   accept = ".pdf",
   multiple = false,
-  maxSizeMB = 50,
+  maxSizeMB = 200,
   onFilesSelected,
   files,
   onRemoveFile,
