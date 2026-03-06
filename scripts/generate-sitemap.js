@@ -8,17 +8,21 @@ const __dirname = path.dirname(__filename);
 // Paths
 const toolsPath = path.resolve(__dirname, "../src/lib/tools.ts");
 const blogPath = path.resolve(__dirname, "../src/lib/blog.ts");
+const seoPath = path.resolve(__dirname, "../src/lib/seo-data.ts");
 const sitemapPath = path.resolve(__dirname, "../public/sitemap.xml");
 
-// Extraction Logic
 const toolsFile = fs.readFileSync(toolsPath, "utf-8");
 const blogFile = fs.readFileSync(blogPath, "utf-8");
+const seoFile = fs.readFileSync(seoPath, "utf-8");
 
 // Regex to find ids in tools.ts: id: "tool-name",
 const toolIds = [...toolsFile.matchAll(/id:\s*"(.*?)"/g)].map(m => m[1]);
 
 // Regex to find slugs in blog.ts: slug: "blog-slug",
 const blogSlugs = [...blogFile.matchAll(/slug:\s*"(.*?)"/g)].map(m => m[1]);
+
+// Regex to find slugs in seo-data.ts: slug: 'slug-name'
+const seoSlugs = [...seoFile.matchAll(/['"]?slug['"]?:\s*['"](.*?)['"]/g)].map(m => m[1]);
 
 const baseUrl = "https://fylora.online";
 
@@ -47,10 +51,16 @@ const generateSitemap = () => {
     xml += `  <url>\n    <loc>${baseUrl}/blog/${slug}</loc>\n    <priority>0.7</priority>\n  </url>\n`;
   });
 
+  // Programmatic SEO Tool Pages
+  seoSlugs.forEach(slug => {
+    xml += `  <url>\n    <loc>${baseUrl}/${slug}</loc>\n    <priority>0.8</priority>\n  </url>\n`;
+  });
+
   xml += `</urlset>`;
 
   fs.writeFileSync(sitemapPath, xml, "utf-8");
-  console.log(`✅ Sitemap successfully generated at ${sitemapPath} with ${staticPages.length + toolIds.length + blogSlugs.length} URLs.`);
+  const totalUrls = staticPages.length + toolIds.length + blogSlugs.length + seoSlugs.length;
+  console.log(`✅ Sitemap successfully generated at ${sitemapPath} with ${totalUrls} URLs.`);
 };
 
 generateSitemap();
