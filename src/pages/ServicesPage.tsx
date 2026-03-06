@@ -56,11 +56,11 @@ const services = [
 export default function ServicesPage() {
     return (
         <Layout>
-            <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 flex flex-col items-center">
+            <section className="relative overflow-hidden pt-8 pb-12 md:pt-16 md:pb-20 flex flex-col items-center">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] opacity-40 mix-blend-screen pointer-events-none animate-[pulse_8s_ease-in-out_infinite]" />
 
                 <div className="container relative z-10 px-6 max-w-7xl mx-auto">
-                    <div className="text-center mb-16 max-w-3xl mx-auto">
+                    <div className="text-center mb-10 max-w-3xl mx-auto">
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export default function ServicesPage() {
                         </motion.p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                         {services.map((service, idx) => (
                             <motion.div
                                 key={service.title}
@@ -87,9 +87,9 @@ export default function ServicesPage() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                                 whileHover={{ y: -8 }}
-                                className="group flex flex-col bg-card border border-white/5 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                                className="group flex flex-col bg-card border border-white/5 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full"
                             >
-                                <div className="w-full aspect-[4/3] overflow-hidden bg-muted/20 relative">
+                                <div className="w-full h-32 sm:h-40 overflow-hidden bg-muted/20 relative shrink-0">
                                     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 duration-300" />
                                     <img
                                         src={service.image}
@@ -98,11 +98,11 @@ export default function ServicesPage() {
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                                     />
                                 </div>
-                                <div className="p-6 md:p-8 flex flex-col flex-1 text-center">
-                                    <h3 className="font-display font-bold text-xl text-foreground mb-3 leading-tight group-hover:text-primary transition-colors duration-300">
+                                <div className="p-5 flex flex-col flex-1 text-center justify-center">
+                                    <h3 className="font-display font-bold text-lg md:text-xl text-foreground mb-2 leading-tight group-hover:text-primary transition-colors duration-300">
                                         {service.title}
                                     </h3>
-                                    <p className="text-sm text-muted-foreground flex-1 leading-relaxed">
+                                    <p className="text-xs md:text-sm text-muted-foreground flex-1 leading-relaxed">
                                         {service.description}
                                     </p>
                                 </div>
