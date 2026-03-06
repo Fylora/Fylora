@@ -1,4 +1,5 @@
 ﻿import { FileText, Scissors, Minimize2, Image, ImagePlus, RotateCw, ArrowUpDown, Droplets, Lock, Unlock, FileType, FileCode, ScanSearch, Highlighter, EyeOff } from "lucide-react";
+import { seoPages } from "./seo-data";
 
 export interface Tool {
   id: string;
@@ -7,11 +8,13 @@ export interface Tool {
   icon: React.ComponentType<{ className?: string }>;
   category: "core" | "convert" | "advanced";
   color: string;
+  seoH1?: string;
   seoTitle: string;
+  seoMetaDescription?: string;
   seoContent: string;
-  seoDefinition: string;
+  seoDefinition?: string;
   seoQuickAnswer: string;
-  seoSteps: { name: string; description: string }[];
+  seoSteps?: { name: string; description: string }[];
   seoFaqs: { question: string; answer: string }[];
 }
 
@@ -463,4 +466,28 @@ export const tools: Tool[] = [
   }
 ];
 
-export const getToolById = (id: string) => tools.find(t => t.id === id);
+export const getToolById = (id: string): Tool | undefined => {
+  // 1. Check if the exact tool exists natively
+  const nativeTool = tools.find(t => t.id === id);
+  if (nativeTool) return nativeTool;
+
+  // 2. Check if this is an SEO programmatic page slug
+  const seoData = seoPages.find(p => p.slug === id);
+  if (seoData) {
+    const baseTool = tools.find(t => t.id === seoData.baseToolId);
+    if (baseTool) {
+      // Return a dynamically assembled tool instance injecting our targeted SEO content
+      return {
+        ...baseTool,
+        seoH1: seoData.seoH1 || baseTool.seoH1,
+        seoTitle: seoData.seoTitle || baseTool.seoTitle,
+        seoMetaDescription: seoData.seoMetaDescription || baseTool.seoMetaDescription,
+        seoContent: seoData.seoContent || baseTool.seoContent,
+        seoQuickAnswer: seoData.seoQuickAnswer || baseTool.seoQuickAnswer,
+        seoFaqs: seoData.seoFaqs || baseTool.seoFaqs
+      };
+    }
+  }
+
+  return undefined;
+};

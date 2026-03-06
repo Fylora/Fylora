@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useCallback, useEffect } from "react";
-import { ArrowLeft, Download, Loader2, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Download, Loader2, CheckCircle2, Upload, File, ArrowRight, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import Layout from "@/components/Layout";
@@ -8,6 +8,7 @@ import FileUploader from "@/components/FileUploader";
 import PrivacyBadge from "@/components/PrivacyBadge";
 import { Button } from "@/components/ui/button";
 import { getToolById, tools } from "@/lib/tools";
+import { seoPages } from "@/lib/seo-data";
 import { processPdf } from "@/lib/pdf-processor";
 import { trackToolUsed } from "@/utils/analytics";
 import ReviewModal from "@/components/ReviewModal";
@@ -319,7 +320,7 @@ const ToolPage = () => {
                 <h2 className="font-display text-2xl font-bold text-foreground mt-12 mb-6 text-center">How to use the {tool.name} tool</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                   {tool.seoSteps.map((step, index) => (
-                    <div key={index} id={`step-${index + 1}`} className="flex flex-col items-center text-center p-6 rounded-2xl bg-card border border-white/5 shadow-sm relative overflow-hidden group hover:border-primary/50 transition-colors">
+                    <div key={index} id={`step-${index + 1}`} className="flex flex-col items-center text-center p-6 rounded-2xl bg-card border border-white/5 shadow-sm relative overflow-hidden group hover:border-primary/50 transition-colors h-full">
                       <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full flex items-center justify-center pointer-events-none">
                         <span className="text-2xl font-display font-bold text-primary/20 absolute top-2 right-4">{index + 1}</span>
                       </div>
@@ -385,6 +386,30 @@ const ToolPage = () => {
                 ));
               })()}
             </ul>
+
+            {/* Internal Programmatic SEO Links (Topic Cluster) */}
+            {(() => {
+              // Find all SEO pages associated with the base tool ID
+              const seoCluster = seoPages.filter(p => p.baseToolId === (getToolById(toolId || "")?.id || tool.id) && p.slug !== toolId);
+
+              if (seoCluster.length === 0) return null;
+
+              return (
+                <>
+                  <h3 className="font-display text-xl font-bold text-foreground mt-12 mb-4 text-center">More {tool.name} Resources</h3>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-0 list-none text-center">
+                    {seoCluster.map(seoLink => (
+                      <li key={seoLink.slug}>
+                        <Link to={`/${seoLink.slug}`} className="block p-4 rounded-xl bg-card border border-white/5 hover:border-primary/50 hover:bg-primary/5 transition-colors font-medium text-sm text-muted-foreground hover:text-foreground">
+                          {seoLink.slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              );
+            })()}
+
           </article>
 
           {/* Dynamic Linked Data specific to the Tool Data (FAQ & HowTo structures) */}
