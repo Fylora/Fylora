@@ -202,8 +202,13 @@ export async function processPdf(
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
-        const pageText = content.items.map((item: { str?: string } | unknown) => (item as { str: string }).str).join(" ");
-        text += `--- Page ${i} ---\n${pageText}\n\n`;
+        // Preserving end-of-lines if available
+        let pageText = "";
+        for (const item of content.items as any[]) {
+          pageText += item.str;
+          pageText += item.hasEOL ? "\n" : " ";
+        }
+        text += `--- Page ${i} ---\n${pageText.trim()}\n\n`;
       }
       return new Blob([text], { type: "text/plain" });
     }
@@ -215,8 +220,12 @@ export async function processPdf(
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
-        const pageText = content.items.map((item: { str?: string } | unknown) => (item as { str: string }).str).join(" ");
-        md += `## Page ${i}\n${pageText}\n\n`;
+        let pageText = "";
+        for (const item of content.items as any[]) {
+          pageText += item.str;
+          pageText += item.hasEOL ? "\n" : " ";
+        }
+        md += `## Page ${i}\n${pageText.trim()}\n\n`;
       }
       return new Blob([md], { type: "text/markdown" });
     }
@@ -436,7 +445,11 @@ export async function processPdf(
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
-        const pageText = content.items.map((item: { str?: string } | unknown) => (item as { str: string }).str).join(" ");
+        let pageText = "";
+        for (const item of content.items as any[]) {
+          pageText += item.str;
+          pageText += item.hasEOL ? "\n" : " ";
+        }
 
         paragraphs.push(
           new Paragraph({
@@ -445,10 +458,12 @@ export async function processPdf(
             ],
             spacing: { after: 200 }
           }),
-          new Paragraph({
-            children: [new TextRun(pageText)],
-            spacing: { after: 400 }
-          })
+          ...pageText.split("\n").map(line =>
+            new Paragraph({
+              children: [new TextRun(line)],
+              spacing: { after: 120 }
+            })
+          )
         );
       }
 

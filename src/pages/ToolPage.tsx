@@ -40,12 +40,15 @@ const ToolPage = () => {
     url: `/${toolId}`,
   });
 
-  const needsMultiple = toolId === "merge-pdf" || toolId === "jpg-to-pdf" || toolId === "jpg-to-pdf-alias";
-  const needsPassword = toolId === "protect-pdf" || toolId === "unlock-pdf";
-  const needsWatermark = toolId === "watermark-pdf";
-  const needsRotate = toolId === "rotate-pdf";
-  const needsAnnotate = toolId === "annotate-pdf";
-  const needsCompress = toolId === "compress-pdf";
+  // Get the base tool id to properly route to pdf-processor and logic checks
+  const resolvedToolId = tool?.id || "";
+
+  const needsMultiple = resolvedToolId === "merge-pdf" || resolvedToolId === "jpg-to-pdf" || resolvedToolId === "jpg-to-pdf-alias";
+  const needsPassword = resolvedToolId === "protect-pdf" || resolvedToolId === "unlock-pdf";
+  const needsWatermark = resolvedToolId === "watermark-pdf";
+  const needsRotate = resolvedToolId === "rotate-pdf";
+  const needsAnnotate = resolvedToolId === "annotate-pdf";
+  const needsCompress = resolvedToolId === "compress-pdf";
 
   const handleFilesSelected = useCallback((newFiles: File[]) => {
     setFiles(prev => needsMultiple ? [...prev, ...newFiles] : newFiles);
@@ -58,11 +61,11 @@ const ToolPage = () => {
   }, []);
 
   const handleProcess = useCallback(async () => {
-    if (!files.length || !toolId) return;
+    if (!files.length || !resolvedToolId) return;
     setStatus("processing");
     setErrorMsg("");
     try {
-      const blob = await processPdf(toolId, files, options);
+      const blob = await processPdf(resolvedToolId, files, options);
       setResult(blob);
       setStatus("done");
 
@@ -78,7 +81,7 @@ const ToolPage = () => {
       const inputType = files[0]?.name.split('.').pop() || "unknown";
 
       let outputType = "pdf"; // Default assumption
-      if (toolId === "split-pdf" || toolId === "pdf-to-jpg") {
+      if (resolvedToolId === "split-pdf" || resolvedToolId === "pdf-to-jpg") {
         outputType = "multiple";
       } else if (!Array.isArray(blob) && blob.type === "text/plain") {
         outputType = "txt";
@@ -91,7 +94,7 @@ const ToolPage = () => {
       setErrorMsg(err instanceof Error ? err.message : "Processing failed");
       setStatus("error");
     }
-  }, [files, toolId, options]);
+  }, [files, resolvedToolId, options, tool?.name]);
 
   const handleDownload = useCallback(() => {
     if (!result) return;
@@ -103,17 +106,17 @@ const ToolPage = () => {
       a.href = url;
 
       let extension = "pdf";
-      if (toolId === "split-pdf") {
+      if (resolvedToolId === "split-pdf") {
         extension = "pdf";
-      } else if (toolId === "pdf-to-jpg") {
+      } else if (resolvedToolId === "pdf-to-jpg") {
         extension = "png";
       } else if (blob.type === "text/plain") {
         extension = "txt";
       } else if (blob.type === "text/markdown") {
         extension = "md";
-      } else if (toolId === "pdf-to-word-alias") {
+      } else if (resolvedToolId === "pdf-to-word-alias") {
         extension = "docx";
-      } else if (toolId === "word-to-pdf" || toolId === "jpg-to-pdf-alias") {
+      } else if (resolvedToolId === "word-to-pdf" || resolvedToolId === "jpg-to-pdf-alias") {
         extension = "pdf";
       }
 
@@ -127,7 +130,7 @@ const ToolPage = () => {
     if (!sessionStorage.getItem("fylora_review_done")) {
       setTimeout(() => setShowReviewModal(true), 1500);
     }
-  }, [result, toolId]);
+  }, [result, toolId, resolvedToolId]);
 
   if (!tool) {
     return (
@@ -165,7 +168,7 @@ const ToolPage = () => {
           <PrivacyBadge className="mb-10 inline-flex" />
 
           <FileUploader
-            accept={toolId === "jpg-to-pdf" ? ".png,.jpg,.jpeg" : ".pdf"}
+            accept={resolvedToolId === "jpg-to-pdf" || resolvedToolId === "jpg-to-pdf-alias" ? ".png,.jpg,.jpeg" : ".pdf"}
             multiple={needsMultiple}
             onFilesSelected={handleFilesSelected}
             files={files}
@@ -176,7 +179,7 @@ const ToolPage = () => {
             {needsPassword && files.length > 0 && (
               <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="p-6 rounded-2xl bg-card border border-white/5 shadow-sm">
                 <label className="text-sm font-semibold text-foreground mb-2 block">
-                  {toolId === "protect-pdf" ? "Set Password" : "Enter Password"}
+                  {resolvedToolId === "protect-pdf" ? "Set Password" : "Enter Password"}
                 </label>
                 <input
                   type="password"
