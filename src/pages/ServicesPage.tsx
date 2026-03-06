@@ -147,7 +147,7 @@ const ServiceCard = ({ service, idx }: { service: Service; idx: number }) => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, ease: "easeOut", delay: (idx % 3) * 0.1 }}
             whileHover={{ y: -8, scale: 1.02 }}
-            className="group flex flex-col bg-card border border-white/5 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 h-[480px] w-[300px] md:w-[350px] shrink-0 snap-center relative"
+            className="group flex flex-col bg-card border border-white/5 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 h-auto min-h-[480px] w-[300px] md:w-[350px] shrink-0 snap-center relative"
         >
             <div className="w-full h-32 sm:h-40 overflow-hidden bg-muted/20 relative shrink-0">
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 duration-500" />
@@ -284,15 +284,46 @@ export default function ServicesPage() {
                         <div className="hidden md:block absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-30 pointer-events-none transition-opacity duration-300 group-hover/carousel:opacity-0" />
                         <div className="hidden md:block absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-30 pointer-events-none transition-opacity duration-300 group-hover/carousel:opacity-0" />
 
-                        <div ref={carouselRef} className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-10 pt-4 px-6 md:px-16 scrollbar-hide py-4 items-center">
+                        <div ref={carouselRef} className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-10 pt-4 px-6 md:px-16 scrollbar-hide py-4 items-stretch">
                             {services.map((service, idx) => (
                                 <ServiceCard key={service.title} service={service} idx={idx} />
                             ))}
                         </div>
                     </div>
 
+                    {/* Conversion CTA Section */}
+                    <div className="mt-24 md:mt-32 text-center bg-primary/5 border border-primary/20 rounded-3xl p-10 md:p-16 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none" />
+                        <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6 relative z-10">
+                            Let's Build Something Exceptional
+                        </h2>
+                        <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto relative z-10">
+                            Partner with Fylora to build powerful websites, AI automation systems, and data-driven growth solutions.
+                        </p>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <Button size="lg" className="h-14 px-10 rounded-full fylora-gradient-bg border-none hover:scale-105 transition-transform duration-300 text-white shadow-lg shadow-primary/25 font-semibold text-lg w-full sm:w-auto">
+                                        Start Your Project
+                                    </Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-[700px] w-[95vw] h-[85vh] max-h-[85vh] p-0 overflow-hidden bg-background rounded-3xl border-white/10 shadow-2xl flex flex-col gap-0 pointer-events-auto">
+                                    <DialogHeader className="sr-only">
+                                        <DialogTitle>Start Your Project</DialogTitle>
+                                    </DialogHeader>
+                                    <div className="h-14 w-full bg-background border-b border-border flex items-center px-6 shrink-0 relative z-10">
+                                        <span className="font-display font-semibold text-lg">Start Your Project</span>
+                                    </div>
+                                    <div className="w-full flex-1 min-h-0 relative bg-background flex flex-col pt-2">
+                                        <ContactForm />
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
+                        </div>
+                    </div>
+
                     {/* AI Search Optimized FAQ Section */}
-                    <div className="mt-24 md:mt-32 max-w-4xl mx-auto">
+                    <div className="mt-24 md:mt-32 mb-10 max-w-4xl mx-auto">
                         <div className="text-center mb-12">
                             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
                                 Frequently Asked Questions
@@ -320,37 +351,6 @@ export default function ServicesPage() {
                                 <h3 className="font-display font-semibold text-lg md:text-xl text-foreground mb-3">How can I start working with Fylora?</h3>
                                 <p className="text-muted-foreground leading-relaxed">You can contact us through the website to discuss your project and receive a customized solution.</p>
                             </div>
-                        </div>
-                    </div>
-
-                    {/* Conversion CTA Section */}
-                    <div className="mt-24 md:mt-32 mb-10 text-center bg-primary/5 border border-primary/20 rounded-3xl p-10 md:p-16 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none" />
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6 relative z-10">
-                            Let's Build Something Exceptional
-                        </h2>
-                        <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto relative z-10">
-                            Partner with Fylora to build powerful websites, AI automation systems, and data-driven growth solutions.
-                        </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                            <Dialog>
-                                <DialogTrigger asChild>
-                                    <Button size="lg" className="h-14 px-10 rounded-full fylora-gradient-bg border-none hover:scale-105 transition-transform duration-300 text-white shadow-lg shadow-primary/25 font-semibold text-lg w-full sm:w-auto">
-                                        Start Your Project
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent className="sm:max-w-[700px] w-[95vw] h-[85vh] max-h-[85vh] p-0 overflow-hidden bg-background rounded-3xl border-white/10 shadow-2xl flex flex-col gap-0 pointer-events-auto">
-                                    <DialogHeader className="sr-only">
-                                        <DialogTitle>Start Your Project</DialogTitle>
-                                    </DialogHeader>
-                                    <div className="h-14 w-full bg-background border-b border-border flex items-center px-6 shrink-0 relative z-10">
-                                        <span className="font-display font-semibold text-lg">Start Your Project</span>
-                                    </div>
-                                    <div className="w-full flex-1 min-h-0 relative bg-background flex flex-col pt-2">
-                                        <ContactForm />
-                                    </div>
-                                </DialogContent>
-                            </Dialog>
                         </div>
                     </div>
 
