@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           "react-vendor": ["react", "react-dom", "react-router-dom", "framer-motion"],
           "pdf-vendor": ["@cantoo/pdf-lib", "pdfjs-dist"],
+          "firebase-vendor": ["firebase/app", "firebase/firestore"],
           "ui-vendor": [
             "@radix-ui/react-accordion",
             "@radix-ui/react-dialog",

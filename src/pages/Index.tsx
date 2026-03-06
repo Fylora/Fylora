@@ -128,7 +128,7 @@ const Index = () => {
               <div className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 <f.icon className="h-7 w-7" />
               </div>
-              <h3 className="font-display text-2xl font-bold text-foreground mb-3">{f.title}</h3>
+              <h2 className="font-display text-2xl font-bold text-foreground mb-3">{f.title}</h2>
               <p className="text-base text-muted-foreground leading-relaxed">{f.description}</p>
             </motion.div>
           ))}

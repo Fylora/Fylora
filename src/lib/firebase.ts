@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, initializeFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -15,6 +15,13 @@ const app = getApps().length === 0 && firebaseConfig.apiKey
     ? initializeApp(firebaseConfig)
     : getApps()[0];
 
-const db = app ? getFirestore(app) : null;
+let db = null;
+if (app) {
+    try {
+        db = initializeFirestore(app, { experimentalForceLongPolling: true });
+    } catch {
+        db = getFirestore(app);
+    }
+}
 
 export { app, db };
