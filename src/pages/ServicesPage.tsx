@@ -1,7 +1,9 @@
+import { useRef } from "react";
 import Layout from "@/components/Layout";
 import ContactForm from "@/components/ContactForm";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -187,6 +189,15 @@ const ServiceCard = ({ service, idx }: { service: Service; idx: number }) => {
 };
 
 export default function ServicesPage() {
+    const carouselRef = useRef<HTMLDivElement>(null);
+
+    const scroll = (direction: "left" | "right") => {
+        if (carouselRef.current) {
+            const scrollAmount = direction === "left" ? -374 : 374; // Approx width of card + gap
+            carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+    };
+
     const structuredData = {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
@@ -252,38 +263,32 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Horizontal Snapping Carousel */}
-                    <div className="relative w-full overflow-hidden">
-                        {/* Gradient Masks for edges to indicate scorllability on desktop */}
-                        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-30 pointer-events-none" />
-                        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-30 pointer-events-none" />
+                    <div className="relative w-full overflow-hidden group/carousel">
+                        {/* Desktop Scroll Buttons */}
+                        <button
+                            onClick={() => scroll("left")}
+                            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-40 bg-background/80 hover:bg-background border border-border w-12 h-12 rounded-full items-center justify-center shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
+                            aria-label="Scroll left"
+                        >
+                            <ChevronLeft className="w-6 h-6 text-foreground" />
+                        </button>
+                        <button
+                            onClick={() => scroll("right")}
+                            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-40 bg-background/80 hover:bg-background border border-border w-12 h-12 rounded-full items-center justify-center shadow-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
+                            aria-label="Scroll right"
+                        >
+                            <ChevronRight className="w-6 h-6 text-foreground" />
+                        </button>
 
-                        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-10 pt-4 px-6 md:px-16 scrollbar-hide py-4 items-center">
+                        {/* Gradient Masks for edges to indicate scorllability on desktop */}
+                        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-30 pointer-events-none transition-opacity duration-300 group-hover/carousel:opacity-0" />
+                        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-30 pointer-events-none transition-opacity duration-300 group-hover/carousel:opacity-0" />
+
+                        <div ref={carouselRef} className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-10 pt-4 px-6 md:px-16 scrollbar-hide py-4 items-center">
                             {services.map((service, idx) => (
                                 <ServiceCard key={service.title} service={service} idx={idx} />
                             ))}
                         </div>
-                    </div>
-
-                    <div className="mt-16 text-center">
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button size="lg" className="h-14 px-10 rounded-full fylora-gradient-bg border-none hover:scale-105 transition-transform duration-300 text-white shadow-lg shadow-primary/25 font-semibold text-lg">
-                                    Contact Us Today
-                                </Button>
-                            </DialogTrigger>
-
-                            <DialogContent className="sm:max-w-[700px] w-[95vw] h-[85vh] max-h-[85vh] p-0 overflow-hidden bg-background rounded-3xl border-white/10 shadow-2xl flex flex-col gap-0 pointer-events-auto">
-                                <DialogHeader className="sr-only">
-                                    <DialogTitle>Contact Us</DialogTitle>
-                                </DialogHeader>
-                                <div className="h-14 w-full bg-background border-b border-border flex items-center px-6 shrink-0 relative z-10">
-                                    <span className="font-display font-semibold text-lg">Get in Touch</span>
-                                </div>
-                                <div className="w-full flex-1 min-h-0 relative bg-background flex flex-col pt-2">
-                                    <ContactForm />
-                                </div>
-                            </DialogContent>
-                        </Dialog>
                     </div>
 
                     {/* AI Search Optimized FAQ Section */}
@@ -340,25 +345,6 @@ export default function ServicesPage() {
                                     </DialogHeader>
                                     <div className="h-14 w-full bg-background border-b border-border flex items-center px-6 shrink-0 relative z-10">
                                         <span className="font-display font-semibold text-lg">Start Your Project</span>
-                                    </div>
-                                    <div className="w-full flex-1 min-h-0 relative bg-background flex flex-col pt-2">
-                                        <ContactForm />
-                                    </div>
-                                </DialogContent>
-                            </Dialog>
-
-                            <Dialog>
-                                <DialogTrigger asChild>
-                                    <Button size="lg" variant="outline" className="h-14 px-10 rounded-full border-white/20 hover:bg-white/5 transition-colors duration-300 font-semibold text-lg w-full sm:w-auto">
-                                        Contact Us
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent className="sm:max-w-[700px] w-[95vw] h-[85vh] max-h-[85vh] p-0 overflow-hidden bg-background rounded-3xl border-white/10 shadow-2xl flex flex-col gap-0 pointer-events-auto">
-                                    <DialogHeader className="sr-only">
-                                        <DialogTitle>Contact Us</DialogTitle>
-                                    </DialogHeader>
-                                    <div className="h-14 w-full bg-background border-b border-border flex items-center px-6 shrink-0 relative z-10">
-                                        <span className="font-display font-semibold text-lg">Get in Touch</span>
                                     </div>
                                     <div className="w-full flex-1 min-h-0 relative bg-background flex flex-col pt-2">
                                         <ContactForm />
