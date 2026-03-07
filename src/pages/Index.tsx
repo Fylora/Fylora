@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Shield, Zap, Lock, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+
 import { tools } from "@/lib/tools";
 import Layout from "@/components/Layout";
 import React, { Suspense, useState } from "react";
@@ -31,8 +30,11 @@ const Index = () => {
   const { data: reviews = [] } = useQuery({
     queryKey: ['homepage-reviews'],
     queryFn: async () => {
-      if (!db) return [];
       try {
+        const { collection, query, where, getDocs } = await import("firebase/firestore");
+        const { db } = await import("@/lib/firebase");
+
+        if (!db) return [];
         const q = query(
           collection(db, "reviews"),
           where("approved", "==", true)
@@ -199,14 +201,14 @@ const Index = () => {
                         <div>
                           <div className="flex gap-1 mb-4">
                             {Array.from({ length: 5 }).map((_, idx) => (
-                              <Star key={idx} className={`h-4 w-4 ${idx < r.rating ? 'fill-primary text-primary' : 'fill-transparent text-muted-foreground/30'}`} />
+                              <Star key={idx} className={`h-4 w-4 ${idx < r.rating ? 'fill-primary text-primary' : 'fill-transparent text-muted-foreground/50'}`} />
                             ))}
                           </div>
                           <p className="text-foreground leading-relaxed italic">
                             "{r.comment && r.comment.trim().length > 0 ? r.comment : "Great experience, highly recommended!"}"
                           </p>
                         </div>
-                        {r.tool && <p className="text-xs font-bold text-primary mt-6 tracking-widest uppercase opacity-80">{r.tool.replace(/-/g, " ")}</p>}
+                        {r.tool && <p className="text-xs font-bold text-primary mt-6 tracking-widest uppercase">{r.tool.replace(/-/g, " ")}</p>}
                       </motion.div>
                     </div>
                   ))}

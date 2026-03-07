@@ -15,7 +15,7 @@ const ToolCard = ({ tool }: { tool: Tool }) => {
       </div>
 
       <h3 className="relative font-display text-lg font-semibold text-foreground tracking-tight mb-1.5 group-hover:text-primary transition-colors duration-200 ease-out">{tool.name}</h3>
-      <p className="relative text-[13px] text-muted-foreground/80 leading-relaxed font-normal">{tool.description}</p>
+      <p className="relative text-[13px] text-muted-foreground leading-relaxed font-normal">{tool.description}</p>
     </Link>
   );
 };
