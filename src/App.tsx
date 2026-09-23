@@ -2,8 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { Suspense } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import React, { Suspense, useEffect } from "react";
 import ScrollToTop from "./components/ScrollToTop";
 import { Loader2 } from "lucide-react";
 
@@ -36,12 +36,28 @@ const PageLoader = () => (
   </div>
 );
 
+const GoogleAnalyticsTracker = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window.gtag !== "function") return;
+
+    window.gtag("config", "G-VK4MGBDQ53", {
+      page_path: location.pathname + location.search,
+      send_page_view: true,
+    });
+  }, [location.pathname, location.search]);
+
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <GoogleAnalyticsTracker />
         <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>

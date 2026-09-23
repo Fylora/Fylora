@@ -6,10 +6,13 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VK4MGBDQ53"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-VK4MGBDQ53');
+    window.gtag = window.gtag || function () {
+      window.dataLayer.push(arguments);
+    };
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-VK4MGBDQ53', {
+      send_page_view: true
+    });
   </script>
 
   <!-- Preconnect to Google Fonts to establish early handshake -->
