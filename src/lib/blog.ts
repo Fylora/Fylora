@@ -2123,8 +2123,8 @@ blogPosts.push(
         title: "Best Free PDF Compression Tools for Small Businesses in the UK",
         slug: "best-free-pdf-compression-uk",
         metaDescription: "A UK-focused guide to compressing PDFs for small businesses — fast, secure, and free methods to meet email and HMRC upload limits.",
-        date: "2026-09-23",
-        featuredImage: "https://images.unsplash.com/photo-1581091012184-7c8f9f7c9f3b?auto=format&fit=crop&q=80&w=1200",
+        date: "2026-09-24",
+        featuredImage: "/images/blog/best-free-pdf-compression-uk.svg",
         relatedToolId: "compress-pdf",
         content: {
             intro: [
@@ -2163,8 +2163,8 @@ blogPosts.push(
         title: "How to Compress PDFs for Faster Uploads in Australia",
         slug: "compress-pdfs-faster-australia",
         metaDescription: "Australia-specific tips to compress PDFs quickly for government portals, online submissions, and slow mobile networks.",
-        date: "2026-09-23",
-        featuredImage: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&q=80&w=1200",
+        date: "2026-09-25",
+        featuredImage: "/images/blog/compress-pdfs-faster-australia.svg",
         relatedToolId: "compress-pdf",
         content: {
             intro: [
@@ -2186,8 +2186,8 @@ blogPosts.push(
         title: "Secure PDF Tools for Healthcare Providers in the US (HIPAA Considerations)",
         slug: "secure-pdf-tools-healthcare-us-hipaa",
         metaDescription: "A resource for US healthcare providers on using secure, client-side PDF tools that align with HIPAA privacy requirements.",
-        date: "2026-09-23",
-        featuredImage: "https://images.unsplash.com/photo-1584467735878-5f2d3e5c8b88?auto=format&fit=crop&q=80&w=1200",
+        date: "2026-09-26",
+        featuredImage: "/images/blog/secure-pdf-tools-healthcare-us-hipaa.svg",
         relatedToolId: "protect-pdf",
         content: {
             intro: [
@@ -2209,8 +2209,8 @@ blogPosts.push(
         title: "Optimizing PDFs for Indian Government Portals (Income Tax & Aadhaar)",
         slug: "optimizing-pdfs-india-gov-portals",
         metaDescription: "Step-by-step instructions for preparing PDFs that meet Indian government upload requirements and avoid common rejection reasons.",
-        date: "2026-09-23",
-        featuredImage: "https://images.unsplash.com/photo-1508599589937-1a7a3b0b4b56?auto=format&fit=crop&q=80&w=1200",
+        date: "2026-09-27",
+        featuredImage: "/images/blog/optimizing-pdfs-india-gov-portals.svg",
         relatedToolId: "compress-pdf",
         content: {
             intro: [
@@ -2232,8 +2232,8 @@ blogPosts.push(
         title: "Quick PDF Tips for Remote Workers in Canada",
         slug: "pdf-tips-remote-workers-canada",
         metaDescription: "Optimize PDFs for remote Canadian teams — faster sharing, reduced attachments, and privacy-first workflows for home offices.",
-        date: "2026-09-23",
-        featuredImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1200",
+        date: "2026-09-28",
+        featuredImage: "/images/blog/pdf-tips-remote-workers-canada.svg",
         relatedToolId: "compress-pdf",
         content: {
             intro: [
@@ -2255,8 +2255,8 @@ blogPosts.push(
         title: "Preparing Legal PDFs for Courts in Germany: A Practical Guide",
         slug: "legal-pdfs-courts-germany",
         metaDescription: "How to prepare and submit legal PDF documents to German courts — formatting, metadata, and secure redaction best practices.",
-        date: "2026-09-23",
-        featuredImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200",
+        date: "2026-09-29",
+        featuredImage: "/images/blog/legal-pdfs-courts-germany.svg",
         relatedToolId: "redact-pdf",
         content: {
             intro: [
@@ -2278,8 +2278,8 @@ blogPosts.push(
         title: "How Students in Brazil Can Compress and Submit PDFs Easily",
         slug: "students-brazil-compress-submit-pdfs",
         metaDescription: "Brazilian students' guide to compressing assignments and thesis PDFs to meet university upload limits without losing legibility.",
-        date: "2026-09-23",
-        featuredImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1200",
+        date: "2026-09-30",
+        featuredImage: "/images/blog/students-brazil-compress-submit-pdfs.svg",
         relatedToolId: "compress-pdf",
         content: {
             intro: [
@@ -2301,8 +2301,8 @@ blogPosts.push(
         title: "E-commerce Sellers in the EU: Reduce PDF Size for Faster Listings",
         slug: "ecommerce-sellers-eu-reduce-pdf-size",
         metaDescription: "A practical guide for EU e-commerce sellers to optimize product PDFs (catalogues, spec sheets) for faster site performance and compliance.",
-        date: "2026-09-23",
-        featuredImage: "https://images.unsplash.com/photo-1502882704115-83a2a52aaf0c?auto=format&fit=crop&q=80&w=1200",
+        date: "2026-10-01",
+        featuredImage: "/images/blog/ecommerce-sellers-eu-reduce-pdf-size.svg",
         relatedToolId: "compress-pdf",
         content: {
             intro: [
